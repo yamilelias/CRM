@@ -32,7 +32,7 @@ namespace CRM
             // Add framework services.
             services.AddMvc();
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=CRM.Database;Trusted_Connection=True;";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=CRM;Trusted_Connection=True;";
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connection));
         }
 
