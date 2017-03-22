@@ -21,7 +21,8 @@ namespace CRM.Controllers
         // GET: Annotations
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Annotations.ToListAsync());
+            var databaseContext = _context.Annotations.Include(a => a.Contact);
+            return View(await databaseContext.ToListAsync());
         }
 
         // GET: Annotations/Details/5
@@ -33,6 +34,7 @@ namespace CRM.Controllers
             }
 
             var annotations = await _context.Annotations
+                .Include(a => a.Contact)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (annotations == null)
             {
@@ -45,6 +47,7 @@ namespace CRM.Controllers
         // GET: Annotations/Create
         public IActionResult Create()
         {
+            ViewData["ContactId"] = new SelectList(_context.Contacts, "Id", "Name");
             return View();
         }
 
@@ -53,7 +56,7 @@ namespace CRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,Description")] Annotations annotations)
+        public async Task<IActionResult> Create([Bind("Id,Date,Description,ContactId")] Annotations annotations)
         {
             if (ModelState.IsValid)
             {
@@ -61,6 +64,7 @@ namespace CRM.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
+            ViewData["ContactId"] = new SelectList(_context.Contacts, "Id", "Name", annotations.ContactId);
             return View(annotations);
         }
 
@@ -77,6 +81,7 @@ namespace CRM.Controllers
             {
                 return NotFound();
             }
+            ViewData["ContactId"] = new SelectList(_context.Contacts, "Id", "Name", annotations.ContactId);
             return View(annotations);
         }
 
@@ -85,7 +90,7 @@ namespace CRM.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Description")] Annotations annotations)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,Description,ContactId")] Annotations annotations)
         {
             if (id != annotations.Id)
             {
@@ -112,6 +117,7 @@ namespace CRM.Controllers
                 }
                 return RedirectToAction("Index");
             }
+            ViewData["ContactId"] = new SelectList(_context.Contacts, "Id", "Name", annotations.ContactId);
             return View(annotations);
         }
 
@@ -124,6 +130,7 @@ namespace CRM.Controllers
             }
 
             var annotations = await _context.Annotations
+                .Include(a => a.Contact)
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (annotations == null)
             {
