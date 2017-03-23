@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CRM.Models
 {
@@ -24,6 +25,6 @@ namespace CRM.Models
         [Display(Name = "Phone Number")]
         public int PhoneNumber { get; set; }
 
-        public ICollection<Annotations> Annotations { get; set; }
+        public virtual ICollection<Annotations> Annotations { get; set; }
     }
 }

@@ -32,12 +32,17 @@ namespace CRM.Controllers
                 return NotFound();
             }
 
+            //var Add the Annotations made from the contact
+            var annotations = _context.Annotations.Where(c => c.ContactId == id);
+
             var contact = await _context.Contacts
                 .SingleOrDefaultAsync(m => m.Id == id);
             if (contact == null)
             {
                 return NotFound();
             }
+
+            contact.Annotations = annotations.ToList();
 
             return View(contact);
         }

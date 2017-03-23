@@ -29,6 +29,37 @@
             @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
     </dl>
+
+    <h4>@Html.DisplayNameFor(model => model.Annotations) made by @Html.DisplayFor(model => model.Name)</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Annotations.First().Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Annotations.First().Description)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Annotations)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.Id">View Annotation</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 </div>
 <div>
     <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
