@@ -15,7 +15,8 @@ namespace CRM.Models
 
         [DataType(DataType.Date)]
         public string Date { get; set; }
-
+    
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
         [Display(Name = "Contact Owner")]
