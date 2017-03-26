@@ -29,10 +29,10 @@
                             @Html.DisplayNameFor(model => model.Date)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Description)
+                            @Html.DisplayNameFor(model => model.Contact)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.Contact)
+                            @Html.DisplayNameFor(model => model.Description)
                         </th>
                         <th></th>
                     </tr>
@@ -40,15 +40,23 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
+                        // So it is not shown all the annotation, only an extract
+                        var DescriptionLength = item.Description.Length > 50 ? 50 : item.Description.Length;
+                        var Description = item.Description.ToString().Substring(0, DescriptionLength);
+
+                        if(DescriptionLength >= 50)
+                        {
+                            Description += " [...]";
+                        }
                         <tr>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Date)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Description)
+                                @Html.DisplayFor(modelItem => item.Contact.Name)
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Contact.Name)
+                                @Description
                             </td>
                             <td>
                                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

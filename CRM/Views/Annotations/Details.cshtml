@@ -1,4 +1,5 @@
 @model CRM.Models.Annotations
+@using HeyRed.MarkdownSharp
 
 @{
     ViewData["Title"] = "Details";
@@ -26,16 +27,16 @@
                         @Html.DisplayFor(model => model.Date)
                     </dd>
                     <dt>
-                        @Html.DisplayNameFor(model => model.Description)
-                    </dt>
-                    <dd>
-                        @Html.DisplayFor(model => model.Description)
-                    </dd>
-                    <dt>
                         @Html.DisplayNameFor(model => model.Contact)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.Contact.Name)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.Description)
+                    </dt>
+                    <dd>
+                        @Html.Raw(new Markdown().Transform(Model.Description.ToString()))
                     </dd>
                 </dl>
             </div>
