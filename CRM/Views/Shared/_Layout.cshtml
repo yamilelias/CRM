@@ -52,8 +52,8 @@
                 var action = ViewContext.RouteData.Values["action"].ToString(); // TODO: Implement also with action
             }
             <li class="@(controller == "Home" ? "active" : "")"><a asp-controller="Home" asp-action="Index"><svg class="glyph stroked dashboard-dial"><use xlink:href="#stroked-dashboard-dial"></use></svg> Dashboard</a></li>
-            <li class="@(controller == "Contacts" ? "active" : "")"><a asp-controller="Contacts" asp-action="Index"><svg class="glyph stroked male-user"><use xlink:href="#stroked-calendar"></use></svg> Contacts</a></li>
-            <li class="@(controller == "Annotations" ? "active" : "")"><a asp-controller="Annotations" asp-action="Index"><svg class="glyph stroked line-graph"><use xlink:href="#stroked-line-graph"></use></svg> Annotations</a></li>
+            <li class="@(controller == "Contacts" ? "active" : "")"><a asp-controller="Contacts" asp-action="Index"><svg class="glyph stroked male-user"><use xlink:href="#stroked-male-user"></use></svg> Contacts</a></li>
+            <li class="@(controller == "Annotations" ? "active" : "")"><a asp-controller="Annotations" asp-action="Index"><svg class="glyph stroked empty-message"><use xlink:href="#stroked-empty-message"></use></svg> Annotations</a></li>
         </ul>
         <div class="attribution">Template by <a href="http://www.medialoot.com/item/lumino-admin-bootstrap-template/">Medialoot</a><br /><a href="http://www.glyphs.co" style="color: #333;">Icons by Glyphs</a></div>
     </div><!--/.sidebar-->

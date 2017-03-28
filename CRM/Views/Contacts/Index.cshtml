@@ -1,4 +1,6 @@
 @model IEnumerable<CRM.Models.Contact>
+@using Microsoft.EntityFrameworkCore
+@using CRM.Models
 
 @{
     ViewData["Title"] = "Contacts";
@@ -14,7 +16,7 @@
 <div class="row">
     <div class="col-lg-12">
         <p>
-            <a asp-action="Create">Create New</a>
+            <a asp-action="Create"><button class="btn btn-primary">Create New</button></a>
         </p>
     </div>
 </div><!--/.row-->
@@ -50,9 +52,9 @@
                             @Html.DisplayFor(modelItem => item.PhoneNumber)
                         </td>
                         <td>
-                            <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-success">Edit</button></a>
+                            <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-default">Details</button></a>
+                            <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
                         </td>
                     </tr>
                 }

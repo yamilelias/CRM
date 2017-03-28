@@ -1,4 +1,5 @@
 @model CRM.Models.Contact
+@using HeyRed.MarkdownSharp
 
 @{
     ViewData["Title"] = "Details";
@@ -22,19 +23,21 @@
                 @Html.DisplayFor(model => model.Name)
             </div>
             <div class="panel-body">
-                <dl class="dl-horizontal">
+                <dl class="">
                     <dt>
                         @Html.DisplayNameFor(model => model.Name)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.Name)
                     </dd>
+                    <br />
                     <dt>
                         @Html.DisplayNameFor(model => model.Email)
                     </dt>
                     <dd>
                         @Html.DisplayFor(model => model.Email)
                     </dd>
+                    <br />
                     <dt>
                         @Html.DisplayNameFor(model => model.PhoneNumber)
                     </dt>
@@ -43,7 +46,8 @@
                     </dd>
                 </dl>
 
-                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a>
+                <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> | 
+                <a asp-action="Delete" asp-route-id="@Model.Id">Delete</a>
             </div>
 
         </div>
@@ -69,15 +73,27 @@
                     <tbody>
                         @foreach (var item in Model.Annotations)
                         {
+
+                            // So it is not shown all the annotation, only an extract
+                            var DescriptionLength = item.Description.Length > 100 ? 100 : item.Description.Length;
+                            var Description = item.Description.ToString().Substring(0, DescriptionLength);
+
+                            if (DescriptionLength >= 100)
+                            {
+                                Description += " [...]";
+                            }
+
                             <tr>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Date)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
+                                    @*@Description*@
+                                    @Html.Raw(new Markdown().Transform(item.Description.ToString()))
                                 </td>
                                 <td>
-                                    <a asp-controller="Annotations" asp-action="Details" asp-route-id="@item.Id">View Annotation</a>
+                                    <a asp-controller="Annotations" asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-default">View</button></a> 
+                                    <a asp-controller="Annotations" asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-success">Edit</button></a>
                                 </td>
                             </tr>
                         }
